@@ -1,0 +1,137 @@
+class Solution:
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        if not edges:
+            return True
+
+        tree = defaultdict(list)
+        for v1, v2 in edges:
+            tree[v1].append(v2)
+            tree[v2].append(v1)
+
+
+        visited = set()
+        def dfs(node, parent):
+            if node in visited:
+                return False
+
+            visited.add(node)
+            for nei in tree[node]:
+                if nei == parent:
+                    continue
+                if not dfs(nei, node):
+                    return False
+            return True
+        
+
+        
+        if not dfs(0, -1):
+            return False # how to start it 
+
+        return n == len(visited) 
+
+        # if len(edges) != n - 1:
+        #     return False
+        
+        # tree = {i:[] for i in range(n)}
+        # for v1, v2 in edges:
+        #     tree[v1].append(v2)
+        #     tree[v2].append(v1)
+
+        # visited = set()
+        
+        # def dfs(node, parent):
+        #     if node in visited:
+        #         return False
+
+        #     visited.add(node)
+
+        #     for child in tree[node]:
+        #         if child == parent:
+        #             continue
+        #         if not dfs(child, node):
+        #             return False
+        #     return True
+            
+
+        # if not dfs(0, -1):
+        #     return False
+        
+        # return n == len(visited)
+
+            
+
+
+        # if not n:
+        #     return True
+
+        
+        # adj = { i:[] for i in range(n)}
+        # for v1,v2 in edges:
+        #     adj[v1].append(v2)
+        #     adj[v2].append(v1)
+
+        
+        # visitSet = set()
+        # def dfs(i, par):
+
+        #     if i in visitSet:
+        #         return False
+
+        #     visitSet.add(i)
+        #     for j in adj[i]:
+        #         if j == par:
+        #             continue
+                
+        #         if not dfs(j, i):
+        #             return False
+
+        #     return True
+        
+        # return dfs(0, -1) and len(visitSet) == n
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # if len(edges) > n - 1:
+        #     return False
+
+        # tree = { i:[] for i in range(n)}
+        # for v1, v2 in edges:
+        #     tree[v1].append(v2)
+        #     tree[v2].append(v1)
+
+        # visitSet = set()
+        # queue = collections.deque([0])
+        # visitSet.add(0)
+
+        # while queue:
+        #     node = queue.popleft()
+
+        #     for nei in tree[node]:
+        #         if nei not in visitSet:
+        #             queue.append(nei)
+        #             visitSet.add(nei)
+        
+        # return len(visitSet) == n
+
+
+
+            
+            
+
+            
+
+
+
+
+        
